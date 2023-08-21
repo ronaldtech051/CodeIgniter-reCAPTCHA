@@ -1,440 +1,115 @@
-Contribution: 2020-01-14 10:00
+# CodeIgniter-reCAPTCHA
 
-Contribution: 2020-01-14 10:01
+The FREE anti-abuse service. Easy to add, advanced security, accessible to wide range of users and platforms. This package is compliant with [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) and [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
 
-Contribution: 2020-01-14 10:02
+# What is reCAPTCHA?
 
-Contribution: 2020-01-14 10:03
+reCAPTCHA is a free service that protects your site from spam and abuse. It uses advanced risk analysis engine to tell humans and bots apart. With the new API, a significant number of your valid human users will pass the reCAPTCHA challenge without having to solve a CAPTCHA (See blog for more details). reCAPTCHA comes in the form of a widget that you can easily add to your blog, forum, registration form, etc.
 
-Contribution: 2020-01-16 10:00
+See [the details][1].
 
-Contribution: 2020-01-16 10:01
+# Sign up for an API key pair
 
-Contribution: 2020-01-16 10:02
+To use reCAPTCHA, you need to [sign up for an API key pair][4] for your site. The key pair consists of a site key and secret. The site key is used to display the widget on your site. The secret authorizes communication between your application backend and the reCAPTCHA server to verify the user's response. The secret needs to be kept safe for security purposes.
 
-Contribution: 2020-01-16 10:03
+# Installation
 
-Contribution: 2020-01-16 10:04
+You can install via http://getsparks.org/packages/recaptcha-library/show
 
-Contribution: 2020-01-16 10:05
+```bash
+$ php tools/spark install -v1.0.2 recaptcha-library
+```
 
-Contribution: 2020-01-17 10:00
+or manual install
 
-Contribution: 2020-01-17 10:01
+```bash
+$ cp config/recaptcha.php your_application/config/
+$ cp libraries/recaptcha.php your_application/libraries/
+```
 
-Contribution: 2020-01-17 10:02
+# Usage
 
-Contribution: 2020-01-17 10:03
+Set your site key and secret on `config/recaptcha.php` file
 
-Contribution: 2020-01-17 10:04
+```php
+$config['recaptcha_site_key'] = '';
+$config['recaptcha_secret_key'] = '';
+```
 
-Contribution: 2020-01-17 10:05
+### Render the reCAPTCHA widget
 
-Contribution: 2020-01-17 10:06
+```php
+$this->load->library('recaptcha');
+echo $this->recaptcha->getWidget();
+```
 
-Contribution: 2020-01-17 10:07
+output:
 
-Contribution: 2020-01-21 10:00
+```html
+<div class="g-recaptcha" data-sitekey="xxxx" data-theme="light" data-type="image" data-callback="" ></div>
+```
 
-Contribution: 2020-01-21 10:01
+change default theme by pass array parameter
 
-Contribution: 2020-01-21 10:02
+```php
+echo $this->recaptcha->getWidget(array('data-theme' => 'dark'));
+```
 
-Contribution: 2020-01-22 10:00
+change default type by pass array parameter
 
-Contribution: 2020-01-22 10:01
+```php
+echo $this->recaptcha->getWidget(array('data-theme' => 'dark', 'data-type' => 'audio'));
+```
 
-Contribution: 2020-01-22 10:02
+### Render Script Tag
 
-Contribution: 2020-01-22 10:03
+```php
+$this->load->library('recaptcha');
+echo $this->recaptcha->getScriptTag();
+```
 
-Contribution: 2020-01-22 10:04
+output:
 
-Contribution: 2020-01-28 10:00
+```html
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=onload&hl=en" async defer></script>
+```
 
-Contribution: 2020-01-28 10:01
+change render value by pass array parameter
 
-Contribution: 2020-01-28 10:02
+```php
+echo $this->recaptcha->getScriptTag(array('render' => 'explicit'));
+```
 
-Contribution: 2020-01-28 10:03
+change default language by pass array parameter
 
-Contribution: 2020-01-28 10:04
+```php
+echo $this->recaptcha->getScriptTag(array('render' => 'explicit', 'hl' => 'zh-TW'));
+```
 
-Contribution: 2020-01-29 10:00
+### Verify Response
 
-Contribution: 2020-01-29 10:01
+Calls the reCAPTCHA siteverify API to verify whether the user passes `g-recaptcha-response` POST parameter.
 
-Contribution: 2020-01-29 10:02
+```php
+$recaptcha = $this->input->post('g-recaptcha-response');
+$response = $this->recaptcha->verifyResponse($recaptcha);
+```
 
-Contribution: 2020-01-29 10:03
+check success or fail
 
-Contribution: 2020-01-29 10:04
+```php
+if (isset($response['success']) and $response['success'] === true) {
+    echo "You got it!";
+}
+```
 
-Contribution: 2020-01-29 10:05
+see the [example controller](example/controller/test.php) and [view](example/views/recaptcha.php)
 
-Contribution: 2020-01-29 10:06
+# Author
 
-Contribution: 2020-01-30 10:00
+Bo-Yi Wu [@appleboy](https://twitter.com/appleboy)
 
-Contribution: 2020-01-30 10:01
-
-Contribution: 2020-01-30 10:02
-
-Contribution: 2020-01-30 10:03
-
-Contribution: 2020-01-30 10:04
-
-Contribution: 2020-01-30 10:05
-
-Contribution: 2020-01-30 10:06
-
-Contribution: 2020-02-03 10:00
-
-Contribution: 2020-02-03 10:01
-
-Contribution: 2020-02-03 10:02
-
-Contribution: 2020-02-03 10:03
-
-Contribution: 2020-02-03 10:04
-
-Contribution: 2020-02-03 10:05
-
-Contribution: 2020-02-03 10:06
-
-Contribution: 2020-02-03 10:07
-
-Contribution: 2020-02-03 10:08
-
-Contribution: 2020-02-03 10:09
-
-Contribution: 2020-02-04 10:00
-
-Contribution: 2020-02-04 10:01
-
-Contribution: 2020-02-04 10:02
-
-Contribution: 2020-02-04 10:03
-
-Contribution: 2020-02-04 10:04
-
-Contribution: 2020-02-04 10:05
-
-Contribution: 2020-02-04 10:06
-
-Contribution: 2020-02-04 10:07
-
-Contribution: 2020-02-07 10:00
-
-Contribution: 2020-02-10 10:00
-
-Contribution: 2020-02-10 10:01
-
-Contribution: 2020-02-10 10:02
-
-Contribution: 2020-02-10 10:03
-
-Contribution: 2020-02-10 10:04
-
-Contribution: 2020-02-10 10:05
-
-Contribution: 2020-02-10 10:06
-
-Contribution: 2020-02-10 10:07
-
-Contribution: 2020-02-10 10:08
-
-Contribution: 2020-02-10 10:09
-
-Contribution: 2020-02-11 10:00
-
-Contribution: 2020-02-11 10:01
-
-Contribution: 2020-02-13 10:00
-
-Contribution: 2020-02-13 10:01
-
-Contribution: 2020-02-13 10:02
-
-Contribution: 2020-02-14 10:00
-
-Contribution: 2020-02-14 10:01
-
-Contribution: 2020-02-14 10:02
-
-Contribution: 2020-02-14 10:03
-
-Contribution: 2020-02-14 10:04
-
-Contribution: 2020-02-14 10:05
-
-Contribution: 2020-02-14 10:06
-
-Contribution: 2020-02-14 10:07
-
-Contribution: 2020-02-14 10:08
-
-Contribution: 2020-02-18 10:00
-
-Contribution: 2020-02-18 10:01
-
-Contribution: 2020-02-18 10:02
-
-Contribution: 2020-02-18 10:03
-
-Contribution: 2020-02-18 10:04
-
-Contribution: 2020-02-18 10:05
-
-Contribution: 2020-02-18 10:06
-
-Contribution: 2020-02-21 10:00
-
-Contribution: 2020-02-21 10:01
-
-Contribution: 2020-02-21 10:02
-
-Contribution: 2020-02-21 10:03
-
-Contribution: 2020-02-21 10:04
-
-Contribution: 2020-02-21 10:05
-
-Contribution: 2020-02-21 10:06
-
-Contribution: 2020-02-21 10:07
-
-Contribution: 2020-02-21 10:08
-
-Contribution: 2020-02-21 10:09
-
-Contribution: 2020-02-21 10:10
-
-Contribution: 2020-02-21 10:11
-
-Contribution: 2020-02-24 10:00
-
-Contribution: 2020-02-24 10:01
-
-Contribution: 2020-02-24 10:02
-
-Contribution: 2020-02-24 10:03
-
-Contribution: 2020-02-24 10:04
-
-Contribution: 2020-02-25 10:00
-
-Contribution: 2020-02-25 10:01
-
-Contribution: 2020-02-25 10:02
-
-Contribution: 2020-02-25 10:03
-
-Contribution: 2020-02-25 10:04
-
-Contribution: 2020-02-25 10:05
-
-Contribution: 2020-02-25 10:06
-
-Contribution: 2020-02-25 10:07
-
-Contribution: 2020-02-25 10:08
-
-Contribution: 2020-02-25 10:09
-
-Contribution: 2020-02-25 10:10
-
-Contribution: 2020-02-25 10:11
-
-Contribution: 2020-02-28 10:00
-
-Contribution: 2020-02-28 10:01
-
-Contribution: 2020-02-28 10:02
-
-Contribution: 2020-02-28 10:03
-
-Contribution: 2020-03-04 10:00
-
-Contribution: 2020-03-04 10:01
-
-Contribution: 2020-03-04 10:02
-
-Contribution: 2020-03-04 10:03
-
-Contribution: 2020-03-04 10:04
-
-Contribution: 2020-03-04 10:05
-
-Contribution: 2020-03-04 10:06
-
-Contribution: 2020-03-09 10:00
-
-Contribution: 2020-03-11 10:00
-
-Contribution: 2020-03-11 10:01
-
-Contribution: 2020-03-11 10:02
-
-Contribution: 2020-03-11 10:03
-
-Contribution: 2020-03-11 10:04
-
-Contribution: 2020-03-13 10:00
-
-Contribution: 2020-03-13 10:01
-
-Contribution: 2020-03-13 10:02
-
-Contribution: 2020-03-13 10:03
-
-Contribution: 2020-03-13 10:04
-
-Contribution: 2020-03-13 10:05
-
-Contribution: 2020-03-13 10:06
-
-Contribution: 2020-03-13 10:07
-
-Contribution: 2020-03-13 10:08
-
-Contribution: 2020-03-13 10:09
-
-Contribution: 2020-03-17 10:00
-
-Contribution: 2020-03-17 10:01
-
-Contribution: 2020-03-17 10:02
-
-Contribution: 2020-03-17 10:03
-
-Contribution: 2020-03-17 10:04
-
-Contribution: 2020-03-17 10:05
-
-Contribution: 2020-03-17 10:06
-
-Contribution: 2020-03-17 10:07
-
-Contribution: 2020-03-18 10:00
-
-Contribution: 2020-03-18 10:01
-
-Contribution: 2020-03-18 10:02
-
-Contribution: 2020-03-18 10:03
-
-Contribution: 2020-03-19 10:00
-
-Contribution: 2020-03-19 10:01
-
-Contribution: 2020-03-19 10:02
-
-Contribution: 2020-03-19 10:03
-
-Contribution: 2020-03-23 10:00
-
-Contribution: 2020-03-23 10:01
-
-Contribution: 2020-03-23 10:02
-
-Contribution: 2020-03-23 10:03
-
-Contribution: 2020-03-23 10:04
-
-Contribution: 2020-03-23 10:05
-
-Contribution: 2020-03-23 10:06
-
-Contribution: 2020-03-23 10:07
-
-Contribution: 2020-03-23 10:08
-
-Contribution: 2020-03-23 10:09
-
-Contribution: 2020-03-23 10:10
-
-Contribution: 2020-03-24 10:00
-
-Contribution: 2020-03-24 10:01
-
-Contribution: 2020-03-24 10:02
-
-Contribution: 2020-03-27 10:00
-
-Contribution: 2020-03-30 10:00
-
-Contribution: 2020-03-30 10:01
-
-Contribution: 2020-03-30 10:02
-
-Contribution: 2020-03-30 10:03
-
-Contribution: 2020-03-30 10:04
-
-Contribution: 2020-03-30 10:05
-
-Contribution: 2020-03-30 10:06
-
-Contribution: 2020-03-30 10:07
-
-Contribution: 2020-03-30 10:08
-
-Contribution: 2020-04-01 10:00
-
-Contribution: 2020-04-01 10:01
-
-Contribution: 2020-04-01 10:02
-
-Contribution: 2020-04-01 10:03
-
-Contribution: 2020-04-01 10:04
-
-Contribution: 2020-04-01 10:05
-
-Contribution: 2020-04-01 10:06
-
-Contribution: 2020-04-01 10:07
-
-Contribution: 2020-04-01 10:08
-
-Contribution: 2020-04-01 10:09
-
-Contribution: 2020-04-01 10:10
-
-Contribution: 2020-04-02 10:00
-
-Contribution: 2020-04-02 10:01
-
-Contribution: 2020-04-02 10:02
-
-Contribution: 2020-04-03 10:00
-
-Contribution: 2020-04-03 10:01
-
-Contribution: 2020-04-03 10:02
-
-Contribution: 2020-04-03 10:03
-
-Contribution: 2020-04-03 10:04
-
-Contribution: 2020-04-06 10:00
-
-Contribution: 2020-04-07 10:00
-
-Contribution: 2020-04-07 10:01
-
-Contribution: 2020-04-07 10:02
-
-Contribution: 2020-04-07 10:03
-
-Contribution: 2020-04-07 10:04
-
-Contribution: 2020-04-10 10:00
-
-Contribution: 2020-04-10 10:01
-
-Contribution: 2020-04-10 10:02
-
-Contribution: 2020-04-10 10:03
-
+[1]: https://www.google.com/recaptcha/intro/index.html
+[2]: http://www.codeigniter.com/
+[3]: https://developers.google.com/recaptcha/
+[4]: http://www.google.com/recaptcha/admin
